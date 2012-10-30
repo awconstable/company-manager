@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="uk.ltd.crossfire.companymanager.server.persistence.ConfigMapper">
+
+  <select id="getOption" parameterType="string" resultType="CompanyConfig">
+    select options.key, options.value from options where options.key = #{value}
+  </select>
+  
+  <select id="getOptions" resultType="CompanyConfig">
+    select options.key, options.value from options
+  </select>
+
+  <insert id="setOption" parameterType="CompanyConfig">
+    INSERT INTO options (options.key, options.value, options.created, options.modified) 
+    VALUES (#{key}, #{value}, NOW(), NOW()) 
+    ON DUPLICATE KEY UPDATE options.value = #{value}, options.modified = NOW()
+  </insert>
+
+</mapper>

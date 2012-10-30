@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="uk.ltd.crossfire.companymanager.server.persistence.InvoiceMapper">
+
+  <select id="getInvoice" parameterType="int" resultMap="invoiceMap">
+    select
+   	 id,
+   	 contact_id,
+   	 doc_number,
+   	 date_issued,
+   	 date_completed,
+   	 date_cancelled,
+   	 net_value,
+   	 vat_value,
+   	 total_value,
+   	 shipping_value,
+   	 client_ref,
+   	 cancelled,
+   	 completed,
+   	 vat_rate,
+   	 comment,
+   	 account_ref,
+   	 company_name,
+   	 address_1,
+   	 address_2,
+   	 city,
+   	 postcode,
+   	 country,
+   	 vat_number   	 
+    from invoices
+    where id = #{value}
+  </select>
+
+  <select id="getInvoices" parameterType="uk.ltd.crossfire.companymanager.server.requests.InvoiceMapperRequest" resultMap="invoiceMap">
+    select
+     id,
+   	 contact_id,
+   	 doc_number,
+   	 date_issued,
+   	 date_completed,
+   	 date_cancelled,
+   	 net_value,
+   	 vat_value,
+   	 total_value,
+   	 shipping_value,
+   	 client_ref,
+   	 cancelled,
+   	 completed,
+   	 vat_rate,
+   	 comment,
+   	 account_ref,
+   	 company_name,
+   	 address_1,
+   	 address_2,
+   	 city,
+   	 postcode,
+   	 country,
+   	 vat_number  
+    from invoices
+    order by doc_number desc
+    limit #{length} offset #{start}
+  </select>
+
+  <select id="getInvoiceCount" resultType="int">
+    select
+		count(*) 
+    from invoices
+  </select>
+
+	<resultMap type="Invoice" id="invoiceMap">
+		<id property="id" column="id"/>
+		<result property="contactId" column="contact_id"/>
+		<result property="docNumber" column="doc_number"/>
+		<!-- 
+		mysql dates cause problems when 0000-00-00 unless jdbc property zeroDateTimeBehavior=convertToNull is set
+		
+		http://stackoverflow.com/questions/782823/handling-datetime-values-0000-00-00-000000-in-jdbc
+		-->
+		<result property="dateIssued" column="date_issued" javaType="java.util.Date"/>
+		<result property="dateCompleted" column="date_completed" javaType="java.util.Date"/>
+		<result property="dateCancelled" column="date_cancelled" javaType="java.util.Date"/>
+
+		<result property="netValue" column="net_value" javaType="double"/>
+		<result property="vatValue" column="vat_value" javaType="double"/>
+		<result property="totalValue" column="total_value" javaType="double"/>
+		<result property="shippingValue" column="shipping_value" javaType="double"/>
+		<result property="clientRef" column="client_ref"/>
+		<result property="cancelled" column="cancelled" javaType="boolean"/>
+		<result property="completed" column="completed" javaType="boolean"/>
+		<result property="vatRate" column="vat_rate" javaType="double"/>
+		<result property="comment" column="comment"/>
+		<result property="accountRef" column="account_ref"/>
+		<result property="companyName" column="company_name"/>
+		<result property="address1" column="address_1"/>
+		<result property="address2" column="address_2"/>
+		<result property="city" column="city"/>
+		<result property="postcode" column="postcode"/>
+		<result property="country" column="country"/>
+		<result property="vatNumber" column="vat_number"/>
+	</resultMap>
+
+</mapper>

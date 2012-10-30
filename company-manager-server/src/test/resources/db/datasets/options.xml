@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <options key="address_1" value="6 Stamford Court"/>
+  <options key="address_2" value="Goldhawk Road"/>
+  <options key="address_3" value=""/>
+  <options key="bank_account_number" value="03688007"/>
+  <options key="bank_address" value="7 High Street, Leicester, LE1 9FS"/>
+  <options key="bank_bic_code" value="LOYDGB21029"/>
+  <options key="bank_branch" value="Leicester High Street"/>
+  <options key="bank_iban_number" value="GB11 LOYD 3094 9703 6880 07"/>
+  <options key="bank_name" value="test2"/>
+  <options key="bank_sort_code" value="30-94-97"/>
+  <options key="city" value="London"/>
+  <options key="company_logo" value="logo_small.gif"/>
+  <options key="company_name" value="Crossfire Ltd"/>
+  <options key="company_reg" value="5185224"/>
+  <options key="corporation_tax_rate" value="21.00"/>
+  <options key="country" value="UK"/>
+  <options key="county" value=""/>
+  <options key="credit_note_number_prefix" value="CFC-"/>
+  <options key="currency" value="GBP"/>
+  <options key="delivery_note_number_prefix" value="CFD-"/>
+  <options key="email" value="info@caughtincrossfire.com"/>
+  <options key="fax_num" value="+44 (0)870 991 7211"/>
+  <options key="invoice_number_prefix" value="CFI-"/>
+  <options key="order_number_prefix" value="CFO-"/>
+  <options key="payment_terms" value="15 Days"/>
+  <options key="pdf_document_template" value="document_template.pdf"/>
+  <options key="pdf_terms_and_conditions" value="terms_and_conditions.pdf"/>
+  <options key="postcode" value="W6 0XB"/>
+  <options key="quote_number_prefix" value="CFQ-"/>
+  <options key="quote_terms" value="30 days"/>
+  <options key="reg_office" value="The Lodge, Brascote, Newbold Verdon, Leicester, LE9 9LE"/>
+  <options key="start_of_financial_year" value="4"/>
+  <options key="tel_num" value="+44 (0)870 991 7210"/>
+  <options key="testKey" value="testValue2"/>
+  <options key="use_https" value="true"/>
+  <options key="vat_number" value="845072920"/>
+  <options key="www" value="www.caughtincrossfire.com"/>
+</dataset>

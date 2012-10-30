@@ -1,0 +1,9 @@
+drop table `credit_note_rows`;
+drop table `credit_notes`;
+drop table `delivery_note_rows`;
+drop table `delivery_notes`;
+drop table `order_rows`;
+drop table `orders`;
+drop table `quote_rows`;
+drop table `quotes`;
+drop table `logs`;
