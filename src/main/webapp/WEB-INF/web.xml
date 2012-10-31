@@ -5,19 +5,63 @@
 
 <web-app>
 
-	<servlet>
-		<servlet-name>config</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/servlet-context.xml</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>/WEB-INF/classes/log4j.properties</param-value>
+    </context-param>
 
-	<servlet-mapping>
-		<servlet-name>config</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/servlet-context.xml </param-value>
+    </context-param>
 
-</web-app>
+    <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+               <!--   commenting out as this may be overridding the other config
+    <servlet>
+        <servlet-name>config</servlet-name>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/servlet-context.xml</param-value>
+        </init-param>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+                   -->
+    <servlet>
+        <servlet-name>greetServlet</servlet-name>
+        <servlet-class>uk.ltd.crossfire.companymanager.server.GreetingServiceImpl</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>invoiceServlet</servlet-name>
+        <servlet-class>uk.ltd.crossfire.companymanager.server.InvoiceRpcServiceImpl</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>greetServlet</servlet-name>
+        <url-pattern>/CompanyManager/greet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>invoiceServlet</servlet-name>
+        <url-pattern>/CompanyManager/invoice</url-pattern>
+    </servlet-mapping>
+    <!--   commenting out as this may be overridding the other config
+        <servlet-mapping>
+            <servlet-name>config</servlet-name>
+            <url-pattern>/</url-pattern>
+        </servlet-mapping>
+                        -->
+        <welcome-file-list>
+            <welcome-file>CompanyManager.html</welcome-file>
+        </welcome-file-list>
+
+    </web-app>
