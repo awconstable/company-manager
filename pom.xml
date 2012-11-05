@@ -293,9 +293,9 @@
 				<groupId>com.carbonfive.db-support</groupId>
 				<artifactId>db-migration-maven-plugin</artifactId>
 				<configuration>
-					<url>jdbc:mysql://192.168.0.20/company_manager_dev2</url>
+					<url>jdbc:mysql://192.168.0.10/CROSSFIRE_company</url>
 					<username>root</username>
-					<password></password>
+					<password />
 				</configuration>
 				<executions>
 					<!--  execution>
