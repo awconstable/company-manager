@@ -11,22 +11,6 @@
 	<context:annotation-config />
 	<context:component-scan base-package="uk.ltd.crossfire.companymanager.server" />
 
-	<context:property-placeholder location="classpath:database.properties"/>
-
-	<bean id="dataSource" destroy-method="close" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="${jdbc.driverClassName}"/>
-		<property name="url" value="${jdbc.url}"/>
-		<property name="username" value="${jdbc.username}"/>
-		<property name="password" value="${jdbc.password}"/>
-		<property name="connectionProperties" value="zeroDateTimeBehavior=convertToNull;"/>
-	</bean>
-
-<!--  
-	<bean name="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
--->
-
 	<import resource="classpath:company-manager-dao.xml"/>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -37,5 +21,7 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="uk.ltd.crossfire.companymanager.server.persistence" />
     </bean>
+
+    <import resource="overrides.xml" />
 
 </beans>
