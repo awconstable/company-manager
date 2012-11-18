@@ -29,7 +29,7 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-               <!--   commenting out as this may be overridding the other config
+    <!--   commenting out as this may be overridding the other config
     <servlet>
         <servlet-name>config</servlet-name>
         <init-param>
@@ -39,23 +39,12 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-                   -->
-    <servlet>
-        <servlet-name>greetServlet</servlet-name>
-        <servlet-class>uk.ltd.crossfire.companymanager.server.GreetingServiceImpl</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
+    -->
     <servlet>
         <servlet-name>invoiceServlet</servlet-name>
         <servlet-class>uk.ltd.crossfire.companymanager.server.InvoiceRpcServiceImpl</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-
-    <servlet-mapping>
-        <servlet-name>greetServlet</servlet-name>
-        <url-pattern>/CompanyManager/greet</url-pattern>
-    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>invoiceServlet</servlet-name>
