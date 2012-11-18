@@ -35,7 +35,7 @@ public class InvoiceDataProvider extends AsyncDataProvider<Invoice> {
       invoiceService.getInvoiceCount(new AsyncCallback<Integer>() {
           @Override
 		public void onFailure(Throwable caught) {
-        	  Window.alert("RPC error");
+        	  Window.alert("RPC error : " + caught);
           }
 
           @Override
@@ -47,7 +47,7 @@ public class InvoiceDataProvider extends AsyncDataProvider<Invoice> {
       invoiceService.getInvoices(start, range.getLength(), new AsyncCallback<List<Invoice>>() {
           @Override
 		public void onFailure(Throwable caught) {
-        	  Window.alert("RPC error");
+              Window.alert("RPC error : " + caught);
           }
 
           @Override
