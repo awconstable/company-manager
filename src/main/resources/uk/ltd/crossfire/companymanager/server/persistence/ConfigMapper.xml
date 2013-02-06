@@ -5,17 +5,17 @@
 <mapper namespace="uk.ltd.crossfire.companymanager.server.persistence.ConfigMapper">
 
   <select id="getOption" parameterType="string" resultType="CompanyConfig">
-    select options.key, options.value from options where options.key = #{value}
+    select `key`, value from options where `key` = #{value}
   </select>
   
   <select id="getOptions" resultType="CompanyConfig">
-    select options.key, options.value from options
+    select `key`, value from options
   </select>
 
   <insert id="setOption" parameterType="CompanyConfig">
-    INSERT INTO options (options.key, options.value, options.created, options.modified) 
-    VALUES (#{key}, #{value}, NOW(), NOW()) 
-    ON DUPLICATE KEY UPDATE options.value = #{value}, options.modified = NOW()
+      INSERT INTO options (`key`, value, created, modified)
+          VALUES (#{key}, #{value}, NOW(), NOW())
+      ON DUPLICATE KEY UPDATE value = #{value}, modified = NOW()
   </insert>
 
 </mapper>
