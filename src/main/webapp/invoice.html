@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crossfire Ltd : Company Manager</title>
+
+    <link href="styles/styles.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/company-manager.css" rel="stylesheet" type="text/css" />
+
+    <link type="text/css" href="lib/jquery/css/smoothness/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="lib/jquery/js/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="lib/jquery/js/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="lib/jquery/plugins/jquery.selectboxes.min.js"></script>
+
+    <script type="text/javascript" src="js/document.js"></script>
+</head>
+
+<body>
+<div id="container">
+    <div id="header_container">
+        <div id="header">
+            <div class='header_logo'><img alt='Crossfire Ltd' src='images/logo_small.gif' width='200'></div>
+            <div class='header_title'>Company Manager</div>
+        </div>
+    </div>
+    <!-- end of header -->
+    <div id="content">
+        <div id="document">
+
+<h4>Invoice</h4>
+
+<form name='form' method='post' >
+
+    <div class="right-column">
+
+        <div class="row"><span class="formlabel"><label for="doc_number"><?=$page_title?> Number:</label></span><span class="formw"><input name='doc_number' id='doc_number' type='text' value='TBA' readonly></span></div>
+
+        <div class="row"><span class="formlabel"><label for="date_issued">Date Issued:</label></span><span class="formw"><input id='date_issued' name='date_issued' type='text' value='' readonly></span></div>
+
+        <div class="row"><span class="formlabel"><label for="client_ref">Customers Reference:</label></span><span class="formw"><input id="client_ref" name='client_ref' type='text'></span></div>
+        <div class="row"><span class="formlabel"><label for="contact">Contact Code:</label></span>
+				<span class="formw">
+                    <select name='contact' id='contact'>
+                        <option value='none'>Please select</option>
+                    </select>
+				</span>
+        </div>
+    </div>
+    <div class="left-column">
+
+        <label for="company_name">Customer Name :</label><input id='company_name' name='company_name'  type='text' readonly>
+        <label for="address_1">Address 1 :</label><input name='address_1' id='address_1' type='text' readonly>
+        <label for="address_2">Address 2 :</label><input name='address_2' id='address_2' type='text' readonly>
+        <label for="address_3">Address 3 :</label><input name='address_3' id='address_3' type='text' readonly>
+        <label for="city">City :</label><input name='city' id='city' type='text' readonly>
+        <label for="postcode">Postcode :</label><input name='postcode' id='postcode' type='text' readonly>
+        <label for="country">Country :</label><input name='country' id='country' type='text' readonly>
+        <label for="email">Email :</label><input name='email' id='email' type='text' readonly>
+
+    </div>
+
+    <div class='link'><a class='button' href='JavaScript:create_line();'>New Line</a></div>
+
+    <input name='numb_layout_lines' id='numb_layout_lines' type='hidden' value='0'>
+
+    <div style="clear:both;"></div>
+
+    <div class='inline document_line_col'>#</div>
+    <div class='inline document_product_code_col'>Product Code</div>
+    <div class='inline document_description_col'>Description</div>
+    <div class='inline document_unit_cost_col'>Unit Cost</div>
+    <div class='inline document_quantity_col'>Quantity</div>
+    <div class='inline document_discount_col'>Discount (%)</div>
+    <div class='inline document_line_total_col'>Line Total</div>
+    <div class='inline document_action_col'>Action</div>
+
+    <div id='line_placeholder'> </div>
+
+    <div class="row">
+        <label for="comment">Comment :</label><textarea name='comment' id='comment' class='doc_comment'></textarea>
+    </div>
+    <div class="right-column">
+
+        <label for="shipping_value">Shipping (GBP) :</label><input name='shipping_value' id='shipping_value' size='10' type='text' value='0.00'>
+        <label for="net_value">Net Total (GBP) :</label><input name='net_value' id='net_value' size='10' type='text' readonly value='0.00'>
+        <label for="vat_rate">VAT @</label>
+        <select name='vat_rate' id='vat_rate'>
+        </select> : <input name='vat_value' id='vat_value' size='10' type='text' readonly value='0.00'>
+        <label for="total_value">Total (GBP) : </label><input name='total_value' id='total_value' size='10' type='text' readonly value='0.00'>
+    </div>
+    <div class="sumbit">
+        <div class='link'><a class='button' href='JavaScript:submit_form();'>Save</a></div>
+    </div>
+
+</form>
+
+<script language='JavaScript'>create_line();</script>
+
+            <div class="clear-both"></div>
+        </div> <!-- end of document -->
+        <div id='footer'>
+            v2 <a href='http://www.crossfire.ltd.uk' target='new'>&copy; Crossfire Ltd 2013</a>
+        </div> <!-- end of footer -->
+
+    </div> <!-- end of content -->
+</div> <!-- end of container -->
+</body>
+</html>

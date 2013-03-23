@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="uk.ltd.crossfire.companymanager.server.dao.ContactDao">
+
+  <select id="getContact" parameterType="int" resultType="Contact">
+      select
+          id,
+          account_ref as accountRef,
+          title,
+          firstname,
+          surname,
+          company_name as CompanyName,
+          address_1 as address1,
+          address_2 as address2,
+          address_3 as address3,
+          city,
+          county,
+          postcode,
+          country,
+          email,
+          vat_number as vatNumber,
+          company_reg as companyRegistration
+      from contacts
+      where id = #{value}
+  </select>
+  
+  <select id="getContacts" resultType="Contact">
+      select
+          id,
+          account_ref as accountRef,
+          title,
+          firstname,
+          surname,
+          company_name as CompanyName,
+          address_1 as address1,
+          address_2 as address2,
+          address_3 as address3,
+          city,
+          county,
+          postcode,
+          country,
+          email,
+          vat_number as vatNumber,
+          company_reg as companyRegistration
+      from contacts
+  </select>
+
+</mapper>

@@ -1,0 +1,266 @@
+body {
+	font-family: sans-serif;
+	font-size: 11px;
+	padding: 10px;
+}
+
+a:link,a:visited {
+	text-decoration: none;
+	color: #CC0000;
+}
+
+
+table td, table th {
+    font-size: 13px;
+    font-family: sans-serif;
+}
+
+.error {
+    background-color: #FD8484;
+    border: 1px solid red;
+    text-align: center;
+    font-size: 16px;
+    padding: 10px 0;
+    font-weight: bold;
+}
+
+.footer {
+	margin: 10px;
+	font-size: x-small;
+	text-align: right;
+}
+
+
+.title {
+	text-align: center;
+	font-weight: normal;
+	font-size: small;
+	border-bottom-style: solid;
+	border-bottom-width: thin;
+	color: black;
+	border-color: gray;
+	background-color: #EFEFEF;
+	padding-left: 5px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.input {
+	padding: 3px;
+	border-style: solid;
+	background-color: #EFEFEF;
+	border-color: gray;
+	border-width: 1px;
+}
+
+.login_msg {
+	font-weight: normal;
+	color: red;
+	position: absolute;
+	width: 98%;
+	text-align: center;
+	top: 27%;
+}
+
+.button {
+	background-color: white;
+	border-color: black;
+	border-style: outset;
+	border-width: 1px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.loginbox {
+    margin: 200px auto;
+	text-align: center;
+}
+
+.loginbox table {
+	width: 280px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: gray;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+}
+
+.loginbox td {
+	font-size: small;
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+}
+
+#header-container {
+	background-color: #FFFFFF;
+	clear: both;
+	padding: 0 40px 10px;
+}
+
+#header {
+	margin: 0 auto;
+	padding: 10px;
+	width: 1000px;
+}
+
+.header_title {
+	font-family: serif;
+	width: 33%;
+	font-size: 24px;
+	font-style: italic;
+	text-align: center;
+	display: inline-block;
+}
+
+.header_logo {
+	width: 33%;
+	display: inline-block;
+}
+
+.header_info {
+	width: 33%;
+	display: inline-block;
+	text-align: right;
+}
+
+#footer {
+	margin: 10px auto 0;
+	padding: 10px;
+	width: 1000px;
+	text-align: right;
+}
+
+#document {
+	margin: 0 auto;
+	border: 1px solid #cccccc;
+	background-color: #dddddd;
+	padding: 10px;
+	width: 1000px;
+}
+
+.box {
+	border-style: solid;
+	border-width: 1px;
+	text-align: center;
+	width: 95%;
+	margin-bottom: 5px;
+	margin-left: 5px;
+}
+
+.left_column { /*position: relative;*/
+	width: 33.3%;
+	/*left: 0%;*/ /*background:#fff;*/
+	margin-top: 20px;
+	padding-top: 0;
+	float: left;
+	display: block;
+}
+
+.middle_column { /*position: relative;*/
+	width: 33.3%;
+	/*background:#fff;*/
+	margin-top: 20px;
+	padding-top: 0;
+	display: block;
+	float: left;
+}
+
+.right_column { /*position: relative;*/
+	width: 33.3%;
+	/*background:#fff;*/
+	margin-top: 20px;
+	padding-top: 0;
+	float: right;
+	display: block;
+}
+
+.link,.drop_box {
+	padding: 10px;
+}
+
+.links a {
+    padding: 10px;
+}
+
+.invoice_line,.document_line,.document_line_alert {
+	position: relative;
+	background-color: #FFFFCC;
+	border-style: solid;
+	border-width: 1px;
+	padding: 2px;
+	height: 26px;
+	margin: 3px;
+	border-width: 1px;
+}
+
+th.actions {
+    width: 160px;
+}
+
+.document_line_cancelled {
+	background-color: #cccccc;
+}
+
+.document_line_alert {
+	background-color: #FD8484;
+	padding: 4px;
+}
+
+.box2 {
+	border-style: solid;
+	border-width: 1px;
+	text-align: center;
+	width: 100%;
+	margin-bottom: 5px;
+	margin-left: 5px;
+}
+
+.message {
+	background-color: yellow;
+	border-color: black;
+	border-width: 1px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.content {
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+/* --- pagination --- */
+.pagination {
+	margin: 15px 25px;
+	text-align: right;
+}
+
+.pagination-previous,.pagination-next {
+	text-transform: uppercase;
+}
+
+.pagination-previous.inactive,.pagination-next.inactive {
+	color: grey;
+}
+
+.pagination-previous {
+	margin-right: 10px;
+}
+
+.pagination-next {
+	margin-left: 10px;
+}
+
+.pagination-numbers {
+	font-weight: bold;
+	margin: 5px 0;
+}

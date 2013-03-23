@@ -23,7 +23,7 @@
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="uk.ltd.crossfire.companymanager.server.persistence" />
+        <property name="basePackage" value="uk.ltd.crossfire.companymanager.server.persistence;uk.ltd.crossfire.companymanager.server.dao" />
     </bean>
 
     <import resource="overrides.xml" />

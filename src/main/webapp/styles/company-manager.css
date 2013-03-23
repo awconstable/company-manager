@@ -1,0 +1,405 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	text-align: center;
+	color: #333;
+}
+
+/* General Style Info */
+a {
+	color: #003d4c;
+	text-decoration: underline;
+}
+
+a:hover {
+	color: #003d4c;
+	text-decoration: none;
+}
+
+a img {
+	border: none;
+}
+
+h1,h2,h3,h4 {
+	font-weight: normal;
+}
+
+h1 {
+	color: #003d4c;
+	margin: 0.3em 0;
+	font-size: 180%;
+}
+
+h2 {
+	color: black;
+	padding-top: 0.5em;
+	margin: 0.3em 0;
+	font-size: 200%;
+}
+
+h3 {
+	color: #c6c65b;
+	padding-top: 2em;
+	font-size: 140%;
+}
+
+h4 {
+	color: black;
+	font-weight: normal;
+	font-size: 400%;
+}
+
+em {
+	font-size: 12px;
+}
+
+ul,li {
+	margin: 0 12px;
+}
+
+/* Layout */
+#container {
+	text-align: left;
+}
+
+#content {
+	clear: both;
+	padding: 0 40px 10px 40px;
+	background-color: #fff;
+	color: #333;
+}
+
+.left-column {
+	float: left;
+	width: 360px;
+}
+
+.right-column {
+	float: right;
+	width: 360px;
+}
+
+.recipient {
+	padding-left: 25px;
+}
+
+div.row {
+	clear: both;
+	padding-top: 10px;
+}
+
+div.row span.formlabel {
+	float: left;
+	width: 155px;
+	text-align: right;
+}
+
+div.row span.formw {
+	float: right;
+	width: 200px;
+	text-align: left;
+}
+
+/* tables */
+table {
+	width: 100%;
+}
+
+th {
+	background-color: #e2e2e2;
+	border-top: 1px solid #fff;
+	border-left: 1px solid #fff;
+	border-right: 1px solid #003d4c;
+	border-bottom: 1px solid #003d4c;
+	text-align: center;
+	padding: 1px 4px;
+}
+
+table tr td {
+	padding: 2px 4px;
+}
+
+table tr.altRow td {
+	background: #f4f4f4;
+}
+
+table td.actions {
+	white-space: nowrap;
+}
+
+/* notices and errors */
+#flashMessage,.error,.error_message {
+	color: #900;
+	font-size: 16px;
+	background-color: #fff;
+	margin: 8px 0;
+	font-weight: bold;
+}
+
+.error_message {
+	clear: both;
+}
+
+.error em {
+	font-size: 18px;
+	color: #003d4c;
+}
+
+.notice {
+	color: #656565;
+	font-size: 14px;
+	background-color: #f4f4f4;
+	padding: 0.5em;
+	margin: 1em 0;
+	display: block;
+}
+
+.tip {
+	color: #656565;
+	background-color: #ddd;
+}
+
+/* forms */
+form {
+	margin-top: 2em;
+}
+
+form div.date {
+	margin-left: 0;
+}
+
+label .label {
+	font-size: 16px;
+}
+
+input[type=checkbox] {
+	float: left;
+	clear: left;
+	margin: 2px 6px 7px 2px;
+}
+
+input[disabled] {
+	background-color: #ccc;
+	color: black;
+}
+
+input,textarea {
+	clear: both;
+	display: block;
+	font-size: 14px;
+	font-family: inherit;
+}
+
+select {
+	clear: both;
+	vertical-align: text-bottom;
+	font-size: 14px;
+	font-family: inherit;
+}
+
+option {
+	font-size: 14px;
+	font-family: inherit;
+	padding: 0 0.3em;
+}
+
+input[type=submit] {
+	display: inline;
+	vertical-align: bottom;
+}
+
+input[type=button] {
+	border: 1px solid black;
+	padding: 1px;
+	margin: 0;
+}
+
+div.required {
+	clear: both;
+	color: #222;
+	font-weight: bold;
+}
+
+div.optional {
+	clear: both;
+	color: #555;
+}
+
+div.submit {
+	clear: both;
+	margin-top: 40px;
+	margin-left: 140px;
+}
+
+/* action links */
+ul.actions {
+	float: left;
+	margin-left: 20px;
+	width: 200px;
+}
+
+ul.actions,li {
+	margin-top: 4px;
+}
+
+pre {
+	padding: 1em;
+}
+
+div.auto_complete {
+	position: absolute;
+	width: 250px;
+	background-color: white;
+	border: 1px solid #888;
+	margin: 0;
+	padding: 0;
+}
+
+ul.contacts {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul.contacts,li.selected {
+	background-color: #ffb;
+}
+
+li.contact {
+	list-style-type: none;
+	display: block;
+	margin: 0;
+	padding: 2px;
+	height: 32px;
+}
+
+li.contact,div.image {
+	float: left;
+	width: 32px;
+	height: 32px;
+	margin-right: 8px;
+}
+
+li.contact,div.name {
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 1.2em;
+}
+
+li.contact,div.email {
+	font-size: 10px;
+	color: #888;
+}
+
+#list {
+	margin: 0;
+	margin-top: 10px;
+	padding: 0;
+	list-style-type: none;
+	width: 250px;
+}
+
+#list li {
+	margin: 0;
+	margin-bottom: 4px;
+	padding: 5px;
+	border: 1px solid #888;
+	cursor: move;
+	width: 730px;
+}
+
+input.doc_input_right {
+	width: 100px;
+	text-align: right;
+}
+
+textarea.doc_comment {
+	width: 740px;
+	height: 100px;
+	margin-bottom: 5px;
+}
+
+input.doc_line_number,input.doc_line_cost,input.doc_line_desc,select.doc_line_select,input.doc_line_quan
+	{
+	display: inline;
+	margin: 0;
+	margin-right: 5px;
+	text-align: right;
+	height: 16px;
+}
+
+input.doc_line_number {
+	width: 20px;
+}
+
+input.doc_line_cost {
+	width: 70px;
+}
+
+input.doc_line_quan {
+	width: 30px;
+}
+
+input.doc_line_desc {
+	width: 200px;
+}
+
+select.doc_line_select {
+	width: 110px;
+	height: 18px;
+	margin-top: 2px;
+}
+
+input.x_button {
+	display: inline;
+	width: 20px;
+	height: 20px;
+	border: solid 1px black;
+}
+
+.clear-both {
+	clear: both;
+}
+
+.inline {
+	display: inline;
+}
+
+.document_line_col {
+	width: 30px;
+}
+
+.document_product_code_col {
+	width: 160px;
+}
+
+.document_product_code_col {
+	width: 160px;
+}
+
+.document_description_col {
+	width: 300px;
+}
+
+.document_unit_cost_col {
+	width: 160px;
+}
+
+.document_quantity_col {
+	width: 160px;
+}
+
+.document_discount_col {
+	width: 160px;
+}
+
+.document_line_total_col {
+	width: 160px;
+}
+
+.document_action_col {
+	width: 160px;
+}
