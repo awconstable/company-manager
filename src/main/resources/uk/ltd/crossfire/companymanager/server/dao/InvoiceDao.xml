@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="uk.ltd.crossfire.companymanager.server.persistence.InvoiceMapper">
+<mapper namespace="uk.ltd.crossfire.companymanager.server.dao.InvoiceDao">
 
   <select id="getInvoice" parameterType="int" resultMap="invoiceMap">
     select
@@ -33,7 +33,7 @@
     where id = #{value}
   </select>
 
-  <select id="getInvoices" parameterType="uk.ltd.crossfire.companymanager.server.requests.InvoiceMapperRequest" resultMap="invoiceMap">
+  <select id="getInvoices" resultMap="invoiceMap">
     select
      id,
    	 contact_id,
@@ -58,6 +58,35 @@
    	 postcode,
    	 country,
    	 vat_number  
+    from invoices
+    order by doc_number desc
+  </select>
+
+  <select id="getInvoicePage" parameterType="uk.ltd.crossfire.companymanager.server.requests.InvoiceMapperRequest" resultMap="invoiceMap">
+    select
+     id,
+   	 contact_id,
+   	 doc_number,
+   	 date_issued,
+   	 date_completed,
+   	 date_cancelled,
+   	 net_value,
+   	 vat_value,
+   	 total_value,
+   	 shipping_value,
+   	 client_ref,
+   	 cancelled,
+   	 completed,
+   	 vat_rate,
+   	 comment,
+   	 account_ref,
+   	 company_name,
+   	 address_1,
+   	 address_2,
+   	 city,
+   	 postcode,
+   	 country,
+   	 vat_number
     from invoices
     order by doc_number desc
     limit #{length} offset #{start}

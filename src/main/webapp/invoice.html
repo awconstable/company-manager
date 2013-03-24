@@ -11,6 +11,8 @@
     <script type="text/javascript" src="lib/jquery/js/jquery-1.6.4.min.js"></script>
     <script type="text/javascript" src="lib/jquery/js/jquery-ui-1.8.16.custom.min.js"></script>
     <script type="text/javascript" src="lib/jquery/plugins/jquery.selectboxes.min.js"></script>
+    <script type="text/javascript" src="lib/jquery/plugins/jquery.getUrlParam.js"></script>
+    <script type="text/javascript" src="lib/jquery/plugins/jquery.dateFormat.js"></script>
 
     <script type="text/javascript" src="js/invoice.js"></script>
 </head>
@@ -23,7 +25,7 @@
             <div class='header_title'>Company Manager</div>
         </div>
     </div>
-    <!-- end of header -->
+
     <div id="content">
         <div id="document">
 
@@ -33,11 +35,11 @@
 
     <div class="right-column">
 
-        <div class="row"><span class="formlabel"><label for="doc_number"><?=$page_title?> Number:</label></span><span class="formw"><input name='doc_number' id='doc_number' type='text' value='TBA' readonly></span></div>
+        <div class="row"><span class="formlabel"><label for="invoice_number"><?=$page_title?> Number:</label></span><span class="formw"><input name='invoice_number' id='invoice_number' type='text' readonly></span></div>
 
         <div class="row"><span class="formlabel"><label for="date_issued">Date Issued:</label></span><span class="formw"><input id='date_issued' name='date_issued' type='text' value='' readonly></span></div>
 
-        <div class="row"><span class="formlabel"><label for="client_ref">Customers Reference:</label></span><span class="formw"><input id="client_ref" name='client_ref' type='text'></span></div>
+        <div class="row"><span class="formlabel"><label for="customer_ref">Customers Reference:</label></span><span class="formw"><input id="customer_ref" name='customer_ref' type='text'></span></div>
         <div class="row"><span class="formlabel"><label for="contact">Contact Code:</label></span>
 				<span class="formw">
                     <select name='contact' id='contact'>
@@ -91,8 +93,6 @@
     <button id="save_button" type="button" onclick="submit_form();return false;">Save</button>
 
 </form>
-
-<script language='JavaScript'>create_line();</script>
 
             <div class="clear-both"></div>
         </div>

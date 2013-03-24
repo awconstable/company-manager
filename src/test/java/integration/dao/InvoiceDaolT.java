@@ -1,4 +1,4 @@
-package integration.persistence;
+package integration.dao;
 
 import static org.junit.Assert.assertEquals;
 import integration.AbstractDaoIT;
@@ -8,14 +8,14 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import uk.ltd.crossfire.companymanager.server.dao.InvoiceDao;
 import uk.ltd.crossfire.companymanager.shared.entities.Invoice;
-import uk.ltd.crossfire.companymanager.server.persistence.InvoiceMapper;
 import uk.ltd.crossfire.companymanager.server.requests.InvoiceMapperRequest;
 
-public class InvoiceMapperlT extends AbstractDaoIT {
+public class InvoiceDaolT extends AbstractDaoIT {
 
 	@Autowired
-	private InvoiceMapper dao;
+	private InvoiceDao dao;
 
 	@Test
 	public void testGetInvoice() {
@@ -28,7 +28,7 @@ public class InvoiceMapperlT extends AbstractDaoIT {
 
 	@Test
 	public void testGetInvoices() {
-		List<Invoice> invoices = dao.getInvoices(new InvoiceMapperRequest(0, 10));
+		List<Invoice> invoices = dao.getInvoicePage(new InvoiceMapperRequest(0, 10));
 
 		assertEquals(10, invoices.size());
 	}

@@ -8,6 +8,8 @@ public interface InvoiceService {
 
 	Invoice getInvoice(int id);
 
+    List<Invoice> getInvoices();
+
 	List<Invoice> getInvoices(int start, int length);
 
 	Integer getInvoiceCount();

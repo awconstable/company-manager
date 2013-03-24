@@ -1,11 +1,13 @@
-var cont_data_fields = new Array();
 var line_number = 0;
 
 /* start on document load */
 $(document).ready(function() {
 
-	$("#date_issued").datepicker();
-	$("#date_issued").datepicker('option', 'dateFormat', 'yy-mm-dd');
+    var id = $(document).getUrlParam("id");
+
+	var datepickerEle = $("#date_issued");
+    datepickerEle.datepicker();
+    datepickerEle.datepicker('option', 'dateFormat', 'yy-mm-dd');
 
 	getContactList();
 	getVatList();
@@ -22,10 +24,67 @@ $(document).ready(function() {
 		calculateDocument();
 	});
 
+    if(id){
+        console.log(id);
+        getInvoice(id);
+    } else {
+        updateInvoiceHeader("TBA", new Date());
+        create_line();
+    }
+
 });
 
+function getInvoice(id) {
+
+    $.getJSON("service/invoices/" + id, function (invoice){
+        console.log(invoice.docNumber);
+
+        updateContact(
+            invoice.companyName,
+            invoice.address1,
+            invoice.address2,
+            invoice.address3,
+            invoice.city,
+            invoice.postcode,
+            invoice.country,
+            invoice.email);
+
+        console.log("contact id : " + invoice.contactId);
+
+        //FIXME: Need to select the contact. Not working for some reason. Race condition?
+        //$("#contact").selectOptions(invoice.accountRef);
+
+        updateInvoiceHeader(invoice.docNumber, invoice.dateIssued, invoice.clientRef);
+
+        //TODO: update vat rate select box
+
+        updateInvoiceTotals(invoice.shippingValue, invoice.netValue, invoice.vatValue, invoice.totalValue);
+    });
+
+}
+
+function updateInvoiceHeader(invoiceNumber, dateIssued, customerRef){
+
+    $("#invoice_number").val(invoiceNumber);
+    $("#date_issued").val($.format.date(dateIssued, "yyyy-MM-dd"));
+    $("#customer_ref").val(customerRef);
+
+}
+
+function updateInvoiceTotals(shippingValue, netValue, vatValue, totalValue){
+
+    $("#shipping_value").val(shippingValue.toFixed(2));
+    $("#net_value").val(netValue.toFixed(2));
+    $("#vat_value").val(vatValue.toFixed(2));
+    $("#total_value").val(totalValue.toFixed(2));
+
+}
+
 function getContactList() {
-	$('#contact').attr("disabled", true);
+
+    var contactEle =  $('#contact');
+
+    contactEle.attr("disabled", true);
 
 	$.getJSON("service/contacts", function(data) {
 
@@ -35,52 +94,58 @@ function getContactList() {
 		$("#contact").selectOptions('none', true);
 
 	});
-	$('#contact').removeAttr("disabled");
+    contactEle.removeAttr("disabled");
+}
+
+function updateContact(companyName, address1, address2, address3, city, postcode, country, email){
+    $("#company_name").val(companyName);
+    $("#address_1").val(address1);
+    $("#address_2").val(address2);
+    $("#address_3").val(address3);
+    $("#city").val(city);
+    $("#postcode").val(postcode);
+    $("#country").val(country);
+    $("#email").val(email);
 }
 
 function getContact() {
     var id = $("#contact").val();
 
     if (id == 'none') {
-        $("#company_name").val("");
-        $("#address_1").val("");
-        $("#address_2").val("");
-        $("#address_3").val("");
-        $("#city").val("");
-        $("#postcode").val("");
-        $("#country").val("");
-        $("#email").val("");
+        updateContact();
     } else {
-        $.getJSON("service/contacts/" + id, function (data) {
+        $.getJSON("service/contacts/" + id, function (contact) {
 
-            $("#company_name").val(data.companyName);
-            $("#address_1").val(data.address1);
-            $("#address_2").val(data.address2);
-            $("#address_3").val(data.address3);
-            $("#city").val(data.city);
-            $("#postcode").val(data.postcode);
-            $("#country").val(data.country);
-            $("#email").val(data.email);
-
+            updateContact(
+                contact.companyName,
+                contact.address1,
+                contact.address2,
+                contact.address3,
+                contact.city,
+                contact.postcode,
+                contact.country,
+                contact.email);
         });
     }
 }
 
 function getVatList() {
-	$('#vat_rate').attr("disabled", true);
+
+    var vatRateEle = $('#vat_rate');
+
+    vatRateEle.attr("disabled", true);
 
 	$.getJSON("service/vat", function(data) {
-        var default_id = 0;
 		$.each(data, function(i, vatRate) {
-			$("#vat_rate").addOption(vatRate.rate, vatRate.rate);
+            vatRateEle.addOption(vatRate.rate, vatRate.rate);
 			if (vatRate.defaultRate == 1) {
 				default_rate = vatRate.rate;
 			}
 		});
-		$("#vat_rate").selectOptions(default_rate, true);
+        vatRateEle.selectOptions(default_rate, true);
 
 	});
-	$('#vat_rate').removeAttr("disabled");
+    vatRateEle.removeAttr("disabled");
 }
 
 function getProduct(line_number) {
@@ -101,17 +166,20 @@ function getProduct(line_number) {
 }
 
 function getProductList(line) {
-	$("#select_product_" + line).attr("disabled", true);
+
+    var productLineEle =  $("#select_product_" + line);
+
+    productLineEle.attr("disabled", true);
 
 	$.getJSON("service/products", function(data) {
 		$.each(data, function(i, product) {
-			$("#select_product_" + line).addOption(product.id,
+            productLineEle.addOption(product.id,
                 product.productRef);
 		});
-		$("#select_product_" + line).selectOptions('none', true);
+        productLineEle.selectOptions('none', true);
 
 	});
-	$("#select_product_" + line).removeAttr("disabled");
+    productLineEle.removeAttr("disabled");
 }
 
 function submit_form() {
@@ -120,14 +188,7 @@ function submit_form() {
 	}
 }
 
-function clear_customer_data() {
-	for ( var i = 0; i < cont_data_fields.length; i++) {
-		document.getElementById(cont_data_fields[i]).value = "";
-	}
-}
-
 function resetRow(line_number) {
-	$('#prod_description_line_' + line_number).val("");
 	$('#prod_description_line_' + line_number).val("");
 	$('#prod_retail_cost_line_' + line_number).val(0.00);
 	$('#prod_discount_cost_line_' + line_number).val(0.00);
@@ -138,29 +199,36 @@ function resetRow(line_number) {
 }
 
 function calculateDocument() {
-	var i = 0;
-		var net_invoice_value = 0;
-		var vat_rate = $('#vat_rate').val();
+	var net_invoice_value = 0;
+	var vat_rate = $('#vat_rate').val();
 
-		for (i = 1; i < (line_number + 1); i++) {
-			floatRetailCost = parseFloat($('#prod_retail_cost_line_' + i).val());
-			floatQuantity = parseFloat($('#quantity_line_' + i).val());
-			floatDiscount = parseFloat($('#discount_line_' + i).val());
-			floatDiscount = (100 - floatDiscount) / 100;
-			floatDiscountCost = floatRetailCost * floatDiscount;
-			line_total = floatDiscountCost * floatQuantity;
+    var floatRetailCost;
+    var floatQuantity;
+    var floatDiscount;
+    var floatDiscountCost;
+    var line_total;
+    for (i = 1; i < (line_number + 1); i++) {
+        floatRetailCost = parseFloat($('#prod_retail_cost_line_' + i).val());
+        floatQuantity = parseFloat($('#quantity_line_' + i).val());
+        floatDiscount = parseFloat($('#discount_line_' + i).val());
+        floatDiscount = (100 - floatDiscount) / 100;
+        floatDiscountCost = floatRetailCost * floatDiscount;
+        line_total = floatDiscountCost * floatQuantity;
 
-			$('#prod_discount_cost_line_' + i)
-					.val(floatDiscountCost.toFixed(2));
-			$('#line_total_line_' + i).val(line_total.toFixed(2));
+        $('#prod_discount_cost_line_' + i)
+            .val(floatDiscountCost.toFixed(2));
+        $('#line_total_line_' + i).val(line_total.toFixed(2));
 
-			net_invoice_value += line_total;
-		}
+        net_invoice_value += line_total;
+    }
 		net_invoice_value += parseFloat($('#shipping_value').val());
-		$('#net_value').val(net_invoice_value.toFixed(2));
-		vat = net_invoice_value * (vat_rate / 100);
-		$('#vat_value').val(vat.toFixed(2));
-		var total = parseFloat($('#net_value').val()) + parseFloat($('#vat_value').val());
+
+        var netValueEle = $('#net_value');
+        netValueEle.val(net_invoice_value.toFixed(2));
+        var vat = net_invoice_value * (vat_rate / 100);
+        var vatValueEle = $('#vat_value');
+        vatValueEle.val(vat.toFixed(2));
+		var total = parseFloat(netValueEle.val()) + parseFloat(vatValueEle.val());
 		$('#total_value').val(total.toFixed(2));
 }
 
@@ -196,8 +264,8 @@ function delete_line(line) {
 }
 
 function getLineNumber(line_item_id){
-	regex = /^\D*(\d+)/;
-	result_array = regex.exec(line_item_id);
+    var regex = /^\D*(\d+)/;
+    var result_array = regex.exec(line_item_id);
 	if(result_array.length > 1){
 		return result_array[1];
 	} else {
