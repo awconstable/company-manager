@@ -12,7 +12,7 @@
     <script type="text/javascript" src="lib/jquery/js/jquery-ui-1.8.16.custom.min.js"></script>
     <script type="text/javascript" src="lib/jquery/plugins/jquery.selectboxes.min.js"></script>
 
-    <script type="text/javascript" src="js/document.js"></script>
+    <script type="text/javascript" src="js/invoice.js"></script>
 </head>
 
 <body>
@@ -58,8 +58,7 @@
         <label for="email">Email :</label><input name='email' id='email' type='text' readonly>
 
     </div>
-
-    <div class='link'><a class='button' href='JavaScript:create_line();'>New Line</a></div>
+    <button id="new_line_button" type="button" onclick="create_line();return false;">New Line</button>
 
     <input name='numb_layout_lines' id='numb_layout_lines' type='hidden' value='0'>
 
@@ -85,24 +84,23 @@
         <label for="net_value">Net Total (GBP) :</label><input name='net_value' id='net_value' size='10' type='text' readonly value='0.00'>
         <label for="vat_rate">VAT @</label>
         <select name='vat_rate' id='vat_rate'>
-        </select> : <input name='vat_value' id='vat_value' size='10' type='text' readonly value='0.00'>
+        </select>
+        <label for="vat_value" > :</label><input name='vat_value' id='vat_value' size='10' type='text' readonly value='0.00'>
         <label for="total_value">Total (GBP) : </label><input name='total_value' id='total_value' size='10' type='text' readonly value='0.00'>
     </div>
-    <div class="sumbit">
-        <div class='link'><a class='button' href='JavaScript:submit_form();'>Save</a></div>
-    </div>
+    <button id="save_button" type="button" onclick="submit_form();return false;">Save</button>
 
 </form>
 
 <script language='JavaScript'>create_line();</script>
 
             <div class="clear-both"></div>
-        </div> <!-- end of document -->
+        </div>
         <div id='footer'>
-            v2 <a href='http://www.crossfire.ltd.uk' target='new'>&copy; Crossfire Ltd 2013</a>
-        </div> <!-- end of footer -->
+            v2.0 <a href='http://www.crossfire.ltd.uk' target='new'>&copy; Crossfire Ltd 2013</a>
+        </div>
 
-    </div> <!-- end of content -->
-</div> <!-- end of container -->
+    </div>
+</div>
 </body>
 </html>

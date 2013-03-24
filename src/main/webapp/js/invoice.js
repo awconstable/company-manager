@@ -116,7 +116,7 @@ function getProductList(line) {
 
 function submit_form() {
 	if (validate()) {
-		document.forms['form'].submit();
+		alert("Send a post request");
 	}
 }
 
@@ -252,9 +252,9 @@ function create_line() {
 				+ "' id='line_total_line_"
 				+ line_number
 				+ "' type='text' size='8' readonly></td>\n";
-	tempstring += "<td class='document_action_col'><a id='del_link_"
+	tempstring += "<td class='document_action_col'><button id='del_button_"
 			+ line_number
-			+ "' class='button' href='javascript:{}' onclick='javascript:delete_line(getLineNumber(this.id));'>Del</a></td>\n";
+			+ "' type='button' onclick='delete_line(getLineNumber(this.id));return false;'>Del</button></td>\n";
 	tempstring += "</tr></table>";
 	elem.innerHTML = tempstring;
 
