@@ -11,7 +11,7 @@ public interface InvoiceDao {
 
     List<Invoice> getInvoices();
 
-    List<Invoice> getInvoicePage(InvoiceMapperRequest request);
+    List<Invoice> getInvoices(InvoiceMapperRequest request);
 
     Integer getInvoiceCount();
 

@@ -26,8 +26,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
 	public List<Invoice> getInvoices(int start, int length) {
-		//return dao.getInvoices(new InvoiceMapperRequest(start, length));
-	    return null;
+		return dao.getInvoices(new InvoiceMapperRequest(start, length));
     }
 
 	@Override

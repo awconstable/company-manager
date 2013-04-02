@@ -33,36 +33,7 @@
     where id = #{value}
   </select>
 
-  <select id="getInvoices" resultMap="invoiceMap">
-    select
-     id,
-   	 contact_id,
-   	 doc_number,
-   	 date_issued,
-   	 date_completed,
-   	 date_cancelled,
-   	 net_value,
-   	 vat_value,
-   	 total_value,
-   	 shipping_value,
-   	 client_ref,
-   	 cancelled,
-   	 completed,
-   	 vat_rate,
-   	 comment,
-   	 account_ref,
-   	 company_name,
-   	 address_1,
-   	 address_2,
-   	 city,
-   	 postcode,
-   	 country,
-   	 vat_number  
-    from invoices
-    order by doc_number desc
-  </select>
-
-  <select id="getInvoicePage" parameterType="uk.ltd.crossfire.companymanager.server.requests.InvoiceMapperRequest" resultMap="invoiceMap">
+  <select id="getInvoices" parameterType="uk.ltd.crossfire.companymanager.server.requests.InvoiceMapperRequest" resultMap="invoiceMap">
     select
      id,
    	 contact_id,
@@ -89,7 +60,9 @@
    	 vat_number
     from invoices
     order by doc_number desc
-    limit #{length} offset #{start}
+    <if test="length != null and start != null">
+      limit #{length} offset #{start}
+    </if>
   </select>
 
   <select id="getInvoiceCount" resultType="int">

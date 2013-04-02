@@ -1,6 +1,8 @@
 package integration.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import integration.AbstractDaoIT;
 
 import java.util.List;
@@ -28,9 +30,16 @@ public class InvoiceDaolT extends AbstractDaoIT {
 
 	@Test
 	public void testGetInvoices() {
-		List<Invoice> invoices = dao.getInvoicePage(new InvoiceMapperRequest(0, 10));
+		List<Invoice> invoices = dao.getInvoices();
 
-		assertEquals(10, invoices.size());
+		assertTrue(invoices.size() > 0);
 	}
+
+    @Test
+    public void testGetPageOfInvoices() {
+        List<Invoice> invoices = dao.getInvoices(new InvoiceMapperRequest(0, 10));
+
+        assertEquals(10, invoices.size());
+    }
 
 }
