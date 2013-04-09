@@ -6,60 +6,80 @@
 
   <select id="getInvoice" parameterType="int" resultMap="invoiceMap">
     select
-   	 id,
-   	 contact_id,
-   	 doc_number,
-   	 date_issued,
-   	 date_completed,
-   	 date_cancelled,
-   	 net_value,
-   	 vat_value,
-   	 total_value,
-   	 shipping_value,
-   	 client_ref,
-   	 cancelled,
-   	 completed,
-   	 vat_rate,
-   	 comment,
-   	 account_ref,
-   	 company_name,
-   	 address_1,
-   	 address_2,
-   	 city,
-   	 postcode,
-   	 country,
-   	 vat_number   	 
-    from invoices
-    where id = #{value}
+     i.id,
+      i.contact_id,
+      i.doc_number,
+      i.date_issued,
+      i.date_completed,
+      i.date_cancelled,
+      i.net_value,
+      i.vat_value,
+      i.total_value,
+      i.shipping_value,
+      i.client_ref,
+      i.cancelled,
+      i.completed,
+      i.vat_rate,
+      i.comment,
+      i.account_ref,
+      i.company_name,
+      i.address_1,
+      i.address_2,
+      i.city,
+      i.postcode,
+      i.country,
+      i.vat_number,
+      r.id as invoice_line_id,
+      r.line_number,
+      r.product_id,
+      r.description,
+      r.retail_cost,
+      r.quantity,
+      r.discount,
+      r.discount_cost,
+      r.line_total
+     from invoices i
+     left outer join invoice_rows r on r.invoice_id = i.id
+    where i.id = #{value}
   </select>
 
   <select id="getInvoices" parameterType="uk.ltd.crossfire.companymanager.server.requests.InvoiceMapperRequest" resultMap="invoiceMap">
-    select
-     id,
-   	 contact_id,
-   	 doc_number,
-   	 date_issued,
-   	 date_completed,
-   	 date_cancelled,
-   	 net_value,
-   	 vat_value,
-   	 total_value,
-   	 shipping_value,
-   	 client_ref,
-   	 cancelled,
-   	 completed,
-   	 vat_rate,
-   	 comment,
-   	 account_ref,
-   	 company_name,
-   	 address_1,
-   	 address_2,
-   	 city,
-   	 postcode,
-   	 country,
-   	 vat_number
-    from invoices
-    order by doc_number desc
+      select
+      i.id,
+      i.contact_id,
+      i.doc_number,
+      i.date_issued,
+      i.date_completed,
+      i.date_cancelled,
+      i.net_value,
+      i.vat_value,
+      i.total_value,
+      i.shipping_value,
+      i.client_ref,
+      i.cancelled,
+      i.completed,
+      i.vat_rate,
+      i.comment,
+      i.account_ref,
+      i.company_name,
+      i.address_1,
+      i.address_2,
+      i.city,
+      i.postcode,
+      i.country,
+      i.vat_number,
+      r.id as invoice_line_id,
+      r.line_number,
+      r.product_id,
+      r.description,
+      r.retail_cost,
+      r.quantity,
+      r.discount,
+      r.discount_cost,
+      r.line_total
+      from invoices i
+      left outer join invoice_rows r on r.invoice_id = i.id
+      order by i.doc_number desc
     <if test="length != null and start != null">
       limit #{length} offset #{start}
     </if>
@@ -101,6 +121,17 @@
 		<result property="postcode" column="postcode"/>
 		<result property="country" column="country"/>
 		<result property="vatNumber" column="vat_number"/>
+        <collection property="rows" ofType="InvoiceRow">
+            <id property="id" column="invoice_line_id"/>
+            <result property="lineNumber" column="line_number"/>
+            <result property="productId" column="product_id"/>
+            <result property="description" column="description"/>
+            <result property="retailCost" column="retail_cost" javaType="double"/>
+            <result property="quantity" column="quantity" javaType="double"/>
+            <result property="discount" column="discount"/>
+            <result property="discountCost" column="discount_cost" javaType="double"/>
+            <result property="lineTotal" column="line_total" javaType="double"/>
+        </collection>
 	</resultMap>
 
 </mapper>

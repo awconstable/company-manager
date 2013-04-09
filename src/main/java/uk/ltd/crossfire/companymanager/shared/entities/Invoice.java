@@ -2,6 +2,8 @@ package uk.ltd.crossfire.companymanager.shared.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Invoice implements Serializable {
 
@@ -33,7 +35,9 @@ public class Invoice implements Serializable {
 	private String country;
 	private String vatNumber;
 
-	public int getId() {
+    private Set<InvoiceRow> rows = new HashSet<InvoiceRow>();
+
+    public int getId() {
 		return id;
 	}
 
@@ -216,6 +220,14 @@ public class Invoice implements Serializable {
 	public void setVatNumber(String vatNumber) {
 		this.vatNumber = vatNumber;
 	}
+
+    public Set<InvoiceRow> getRows() {
+        return rows;
+    }
+
+    public void setRows(Set<InvoiceRow> rows) {
+        this.rows = rows;
+    }
 
 	@Override
 	public String toString() {

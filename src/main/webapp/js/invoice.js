@@ -58,9 +58,27 @@ function getInvoice(id) {
 
         //TODO: update vat rate select box
 
+        createRows(invoice.rows);
+
         updateInvoiceTotals(invoice.shippingValue, invoice.netValue, invoice.vatValue, invoice.totalValue);
     });
 
+}
+
+function createRows(rows) {
+    console.log("here");
+    $.each(rows, function(i, row){
+
+        console.log(row);
+
+        console.log("create line : " + row.lineNumber);
+
+        //function create_line(line_id, line_number, description, retail_cost, discount_cost , quantity, discount, line_total)
+
+        create_line(row.id, row.lineNumber, row.productId, row.description, row.retailCost, row.discountCost, row.quantity, row.discount, row.lineTotal);
+
+
+    });
 }
 
 function updateInvoiceHeader(invoiceNumber, dateIssued, customerRef){
@@ -165,7 +183,13 @@ function getProduct(line_number) {
 
 }
 
-function getProductList(line) {
+function getProductList(line, selected) {
+
+    if(selected == null){
+        selected = 'none'
+    }
+
+    console.log("select product id : " + selected);
 
     var productLineEle =  $("#select_product_" + line);
 
@@ -176,10 +200,10 @@ function getProductList(line) {
             productLineEle.addOption(product.id,
                 product.productRef);
 		});
-        productLineEle.selectOptions('none', true);
-
 	});
     productLineEle.removeAttr("disabled");
+    productLineEle.find("option[value=" + parseInt(selected) + "]").attr("selected",true);
+
 }
 
 function submit_form() {
@@ -273,21 +297,20 @@ function getLineNumber(line_item_id){
 	}
 }
 
-function create_line() {
+function create_line(line_id, line_number, product_id, description, retail_cost, discount_cost, quantity, discount, line_total) {
 
 	var tempstring = "";
 	var elem = document.createElement('div');
-	line_number++;
+	//line_number++;
 
 	$("#numb_layout_lines").val(line_number);
 	var new_elem_name = 'invoice_line_' + line_number;
 	elem.setAttribute('id', new_elem_name);
 	tempstring += "<table><tr>";
-	tempstring += "<td class='document_line_col'><input name='line_"
-			+ line_number + "' id='line_" + line_number
-			+ "' type='text' value='" + line_number
-			+ "' size='1' readonly></td>\n";
-	tempstring += "<td class='document_product_code_col'><select name='select_product_"
+	tempstring += "<td class='document_line_col'><input name='line_" + line_number + "' id='line_" + line_number + "' type='text' value='" + line_number + "' size='1' readonly>";
+    tempstring += "<input name='line_id_" + line_number + "' id='line_id_" + line_number + "' type='hidden' value='" + line_id + "' >" +
+        "</td>\n";
+    tempstring += "<td class='document_product_code_col'><select name='select_product_"
 			+ line_number + "' id='select_product_" + line_number + "'>";
 	tempstring += "<option value='none'>Please select</option>";
 	tempstring += "</select></td>\n";
@@ -295,31 +318,31 @@ function create_line() {
 			+ line_number
 			+ "' id='prod_description_line_"
 			+ line_number
-			+ "' size='50' type='text'></td>\n";
+			+ "' size='50' type='text' value='" + description + "'></td>\n";
 		tempstring += "<td class='document_unit_cost_col'><input name='prod_retail_cost_line_"
 				+ line_number
 				+ "' id='prod_retail_cost_line_"
 				+ line_number
-				+ "' type='text' value='0' size='8'><input name='prod_discount_cost_line_"
+				+ "' type='text' value='" + retail_cost + "' size='8'><input name='prod_discount_cost_line_"
 				+ line_number
 				+ "' id='prod_discount_cost_line_"
 				+ line_number
-				+ "' type='hidden' value='0'></td>\n";
+				+ "' type='hidden' value='" + discount_cost + "'></td>\n";
 	tempstring += "<td class='document_quantity_col'><input name='quantity_line_"
 			+ line_number
 			+ "' id='quantity_line_"
 			+ line_number
-			+ "' type='text' value='1' size='4'></td>\n";
+			+ "' type='text' value='" + quantity + "' size='4'></td>\n";
 		tempstring += "<td class='document_discount_col'><input name='discount_line_"
 				+ line_number
 				+ "' id='discount_line_"
 				+ line_number
-				+ "' type='text' value='0' size='1'></td>\n";
+				+ "' type='text' value='" + discount + "' size='1'></td>\n";
 		tempstring += "<td class='document_line_total_col'><input name='line_total_line_"
 				+ line_number
 				+ "' id='line_total_line_"
 				+ line_number
-				+ "' type='text' size='8' readonly></td>\n";
+				+ "' type='text' size='8' readonly value = '" + line_total + "'></td>\n";
 	tempstring += "<td class='document_action_col'><button id='del_button_"
 			+ line_number
 			+ "' type='button' onclick='delete_line(getLineNumber(this.id));return false;'>Del</button></td>\n";
@@ -339,7 +362,7 @@ function create_line() {
 	$("#quantity_line_" + line_number).change(function() {
 		calculateDocument();
 	});
-	getProductList(line_number);
+	getProductList(line_number, product_id);
 }
 
 function validate() {

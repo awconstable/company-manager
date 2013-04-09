@@ -28,6 +28,15 @@ public class InvoiceDaolT extends AbstractDaoIT {
 		assertEquals(35, invoice.getId());
 	}
 
+    @Test
+    public void testGetInvoiceRows() {
+        Invoice invoice = dao.getInvoice(35);
+
+        System.out.println(invoice.getRows());
+
+        assertTrue(invoice.getRows().size() > 0);
+    }
+
 	@Test
 	public void testGetInvoices() {
 		List<Invoice> invoices = dao.getInvoices();
